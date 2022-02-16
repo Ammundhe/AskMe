@@ -1,0 +1,64 @@
+#user_profile
+##user_profie
+user=fk(user, ondelete=cascade)
+address=models.textfield()
+mobile=models.charfield(max_length=10)
+gmail=models.Emailfield(max_lenght=70)
+
+#question
+
+##question_category
+name=models.charfield()
+status=models.boolenfield(default=true)
+
+##question
+question=models.textfields()
+date_time=models.datetimefield()
+author=models.onetoone(user, ondelete=cascade)
+upvote=models.integerfield(default=0)
+downvote=models.integerfield(default=0)
+status=models.boolenfield(default=true)
+
+
+
+#following
+
+##following
+spaces=models.fk(spaces, ondelete=models.cascade)
+user=models.fk(user, ondelete=models.cascade)
+status=models.boolenfield(default=true)
+
+
+#answer
+
+##answer
+question=models.fk(question, ondelete=models.cascade)
+answer=models.textfield()
+image=models.image(null=true, blank=true)
+date_time=models.datetimefield()
+author=models.fk(user, ondelete=models.cascade)
+upvotes=models.integerfield()
+downvote=models.integerfield()
+status=models.boolenfield(default=true)
+
+
+
+#spacess
+
+##create_spaces 
+space_name=models.charfield()
+discriptions=models.textfield()
+status=models.boolenfield(default=true)
+
+
+##create post
+space=models.fk(create_spaces, ondelete=models.cascade)
+question=models.fk(question,ondelete=models.cascade, null=true, blank=true)
+ask_question=models.textfield(null=true, blank=true)
+image=models.image(null=true, blank=true)
+date_time=models.datetimefield()
+author=models.fk(user, ondelete=models.cascade)
+upvotes=models.integerfield()
+downvote=models.integerfield()
+status=models.boolenfield(default=true)
+
