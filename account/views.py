@@ -60,7 +60,7 @@ class CreateAccount(View):
             password=form.cleaned_data.get('password1')
             user=authenticate(username=username, password=password)
             authlogin(request,user)
-        return redirect("CreateAccount")
+        return redirect("updateProfile")
 
 class updateProfile(View):
 
