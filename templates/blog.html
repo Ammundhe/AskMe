@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<div class="col-md-9 blog--top-part2892">
+    {% for post in new_post %}
+
+    <div class="blog-part3903"> 
+       <img src="{{post.cover_image.url}}" alt="Image" class="img-responsive">
+        <div class="blog-details3902">
+            <h3><span><i class="fa fa-picture-o" aria-hidden="true"></i></span> {{post.title}}</h3>
+            <hr>
+            <div class="ques-icon-info2933"> 
+                <a href="#"><i class="fa fa-user" aria-hidden="true"> {{post.author}}</i></a> 
+                <a href="#"><i class="fa fa-calendar" aria-hidden="true"> {{post.date}}</i></a> 
+                <a href="#"><i class="fa fa-briefcase" aria-hidden="true"> work</i></a> 
+                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"> 2 comments</i>
+                </a> 
+                <a href="#"><i class="fa fa-eye" aria-hidden="true"> 179 viwes</i></a> </div>
+            <p>{{post.description}}</p>
+            <div class="continue-deatils738"> 
+                <a href="{% url 'Post' slug=post.slug %}"><i class="fa fa-plus" aria-hidden="true"> Continue Reading</i></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

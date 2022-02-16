@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block content %}
+<form method="post">
+  {% csrf_token %}
+  <section class="category2781">
+    {% for question in questions %}
+
+    <div class="question-type2033">
+      <div class="row">
+        <div class="col-md-1">
+          <div class="left-user12923 left-user12923-repeat">
+            <a href="#"><img src="image/images.png" alt="image" /> </a>
+            <a href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="right-description893">
+            <div id="que-hedder2983">
+              <h3>
+                <a href="{% url 'Question' slug=question.question %}" target="_blank">
+                  {{question.question}}</a
+                >
+              </h3>
+            </div>
+            <hr />
+            <div class="ques-icon-info3293">
+              <a href="#"
+                ><i class="fa fa-folder" aria-hidden="true"> Answer</i></a
+              >
+              <a href="#"
+                ><i class="fa fa-folder" aria-hidden="true">
+                  {{question.author}}</i
+                ></a
+              >
+
+              <span
+                ><i class="fa fa-clock-o" aria-hidden="true">
+                  {{question.date}}</i
+                >
+              </span>
+              {% if request.user.is_authenticated %}
+              <button
+                type="submit"
+                name="question_upvote"
+                value="{{question.id}}"
+              >
+                <i class="fa fa-skyblue" aria-hidden="true">
+                  {{question.upvote}}upvote</i
+                >
+              </button>
+              <button
+                type="submit"
+                name="question_downvote"
+                value="{{question.id}}"
+              >
+                <i class="fa fa-skyblue" aria-hidden="true">
+                  {{question.downvote}}downvote</i
+                >
+              </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+</form>
+
+{% endblock content %}

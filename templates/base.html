@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="Ask online Form" />
+    <meta
+      name="description"
+      content="The Ask is a bootstrap design help desk, support forum website template coded and designed with bootstrap Design, Bootstrap, HTML5 and CSS. Ask ideal for wiki sites, knowledge base sites, support forum sites"
+    />
+    <meta
+      name="keywords"
+      content="HTML, CSS, JavaScript,Bootstrap,js,Forum,webstagram ,webdesign ,website ,web ,webdesigner ,webdevelopment"
+    />
+    <meta name="robots" content="index, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <title>Ask Me</title>
+    <link
+      href="{% static 'css/bootstrap.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'css/style.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- <link href="css/animate.css" rel="stylesheet" type="text/css"> -->
+    <link
+      href="{% static 'css/font-awesome.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}" />
+    <link
+      href="{% static 'css/editor.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <!--======== Navbar =======-->
+    <div class="top-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="navbar-menu-left-side239">
+              <ul>
+                {% if request.user.is_authenticated %}
+                <li>
+                  <a href="{% url 'LogoutPage' %}"
+                    ><i class="fa fa-user" aria-hidden="true"></i>Logout</a
+                  >
+                </li>
+                {% else %}
+                <li>
+                  <a href="{% url 'LoginPage' %}"
+                    ><i class="fa fa-user" aria-hidden="true"></i>Login</a
+                  >
+                </li>
+
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="navbar-serch-right-side">
+              <form class="navbar-form" role="search">
+                <div class="input-group add-on">
+                  <input
+                    class="form-control form-control222"
+                    placeholder="Search"
+                    id="srch-term"
+                    type="text"
+                  />
+                  <div class="input-group-btn">
+                    <button
+                      class="btn btn-default btn-default2913"
+                      type="button"
+                    >
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========header mega navbar=======-->
+    <div class="top-menu-bottom932">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span> <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"
+              ><img src="image/logo.png" alt="Logo"
+            /></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div
+            class="collapse navbar-collapse"
+            id="bs-example-navbar-collapse-1"
+          >
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Home</a></li>
+              <li><a href="{% url 'Askquestion' %}">Ask Question</a></li>
+              <li class="dropdown">
+                <a
+                  href="#"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Question Category <span class="caret"></span
+                ></a>
+                <ul class="dropdown-menu animated zoomIn">
+                  {% for questionCategory in questionCategories %}
+
+                  <li>
+                    <a
+                      href="{% url 'Category' category_id=questionCategory.id %}"
+                      >{{questionCategory.name}}</a
+                    >
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a
+                  href="#"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Blog <span class="caret"></span
+                ></a>
+                <ul class="dropdown-menu animated zoomIn">
+                  <li><a href="{% url 'BlogPost' %}">Blog </a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a
+                  href=""
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Question <span class="caret"></span
+                ></a>
+                <ul class="dropdown-menu animated zoomIn">
+                  <li><a href="{% url 'Question' %}">questions</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'questionAnswer' %}">Answers</a></li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+    </div>
+
+    <!--======= welcome section on top background=====-->
+    <section class="welcome-part-one">
+      <div class="container">
+        <div class="welcome-demop102 text-center">
+          <form method="get" action="{% url 'questionAnswer' %}">
+            <div class="form-style8292">
+              <div class="input-group">
+                <span class="input-group-addon"
+                  ><i class="fa fa-pencil-square" aria-hidden="true"></i
+                ></span>
+                <input
+                  type="text"
+                  name="search"
+                  class="form-control form-control8392"
+                  placeholder="Ask any question and you be sure find your answer ?"
+                />
+                <button type="submit" class="input-group-addon">Ask Now</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="main-content920">
+      <div class="container">
+        <div class="row">
+          {% block content %} {% endblock content %}
+
+          <!--end of col-md-9 -->
+          <!--strart col-md-3 (side bar)-->
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-social">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>Copyright 2017 Ask me | <strong>Sudo Coder</strong></p>
+          </div>
+          <div class="col-md-6">
+            <div class="social-right2389">
+              <a href="#"
+                ><i class="fa fa-twitter-square" aria-hidden="true"></i
+              ></a>
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="#"
+                ><i class="fa fa-google-plus" aria-hidden="true"></i
+              ></a>
+              <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/npm.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'js/editor.js' %}"></script>
+  </body>
+</html>

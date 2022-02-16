@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+{% if request.user.is_authenticated %}
+<div class="col-md-9">
+  <div class="ask-question-input-part032">
+    <h4>Answer</h4>
+    <hr />
+    <form method="post">
+      {% csrf_token %} {{form}}
+
+      <div class="publish-button2389">
+        <button type="submit" class="publis1291">submit your Answer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% else %}
+  <h1> please login before answering question </h1>
+{% endif %}
+
+{% endblock content %}
