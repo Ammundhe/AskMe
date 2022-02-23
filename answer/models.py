@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class answer(models.Model):
     question=models.ForeignKey(question, on_delete=models.CASCADE, related_name="answer")
-    image=models.ImageField()
+    image=models.ImageField(upload_to="media", null=True, blank=True)
     answer=models.TextField()
     upvote=models.IntegerField(default=0)
     downvote=models.IntegerField(default=0)

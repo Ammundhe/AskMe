@@ -4,6 +4,7 @@ from .forms import askquestion_form, answer_form
 from question.models import question, questionCategory
 from answer.models import answer
 from blog.models import blog
+from datetime import date
 
 
 class HomePage(View):
@@ -183,7 +184,7 @@ class questionAnswer(View):
             update_downvote=answer.objects.get(id=answer_id)
             update_downvote.downvote=int(update_downvote.downvote)+1
             update_downvote.save()
-        return redirect("Answer")
+        return redirect("questionAnswer")
 
 class Answer(View):
     template_name='answer.html'
@@ -200,23 +201,28 @@ class Answer(View):
         return render(request, self.template_name, context)
 
     def post(self, request, question_id=None):
-        new_answer=request.POST.get('answer')
-        image=request.POST.get('image')
-        date=request.POST.get('date')
-        answers, created= answer.objects.get_or_create(question_id=question_id, author_id=request.user)
-        if created:
-            answer.objects.create(
-                question_id=question_id,
-                answer=new_answer,
-                image=image,
-                author=request.user,
-                date=date
-            )
+        form=self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            new_answer=request.POST.get('answer')
+            image=request.FILES.get('image')
+            answers, created= answer.objects.get_or_create(question_id=question_id, author=request.user)
+            if created:
+                answer.objects.create(
+                    question_id=question_id,
+                    answer=new_answer,
+                    image=image,
+                    author=request.user,
+                    date=date.today()
+                )
+                answer.save()
+            else:
+                answers.question_id=question_id
+                answers.answer=new_answer
+                answers.image=image
+                answers.author=request.user
+                answers.date=date.today()
+                answers.save()
+            return redirect("questionAnswer")
         else:
-            answers.question_id=question_id
-            answers.answer=new_answer
-            answers.image=image
-            answers.author=request.user
-            answers.date=date
-            answers.save()
-        return redirect("Answer",question_id=question_id)
+            form=self.form_class(request.POST, request.FILES)
+        return redirect("Answer", question_id=question_id)
